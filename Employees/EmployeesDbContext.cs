@@ -10,8 +10,8 @@ public class EmployeesDbContext : DbContext
     public DbSet<Project> Projects { get; set; }
     public DbSet<Job> Jobs { get; set; }
     
-
-    override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    
+    override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)  
     {
         optionsBuilder.UseMySql(_connectionString,  ServerVersion.AutoDetect(_connectionString));
     }
