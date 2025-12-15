@@ -15,4 +15,6 @@ public class Job : BaseEntity
     
     [ForeignKey("Employee")]
     public int EmployeeId { get; set; }
+    
+    //TODO: czy moge go jakos mozna to zmienic tutaj zeby mzona bylo potempokazac pracownikow i projekt
 }

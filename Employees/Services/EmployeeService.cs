@@ -53,11 +53,11 @@ public class EmployeeService : IEmployeeService
     
     public int CreateEmployee(CreateEmployeeDto dto)
     {
-        var restaurant = _mapper.Map<Employee>(dto);
-        _dbContext.Employees.Add(restaurant);
+        var employee = _mapper.Map<Employee>(dto);
+        _dbContext.Employees.Add(employee);
         _dbContext.SaveChanges();
 
-        return restaurant.Id;
+        return employee.Id;
     }
     
     public bool UpdateEmployees(int id, UpdateEmployeeDto dto)

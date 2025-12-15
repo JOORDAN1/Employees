@@ -10,6 +10,8 @@ builder.Services.AddDbContext<EmployeesDbContext>();
 builder.Services.AddScoped<EmployeeSeeder>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IEmployeeService,  EmployeeService>();
+builder.Services.AddScoped<IProjectService,  ProjectService>();
+builder.Services.AddScoped<IJobService,  JobService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
