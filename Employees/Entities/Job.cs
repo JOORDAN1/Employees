@@ -1,0 +1,18 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Employees.Entities;
+
+
+[Table("Jobs")]
+public class Job : BaseEntity
+{
+    [Required] [MaxLength(50)]
+    public string Name { get; set; }
+    
+    [Required] [MaxLength(200)]
+    public string Description { get; set; }
+    
+    [ForeignKey("Employee")]
+    public int EmployeeId { get; set; }
+}
