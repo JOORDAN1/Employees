@@ -16,10 +16,9 @@ public class CreateEmployeeDto
     public string Email { get; set; }
     
     // TODO:Zapytac leszcza czm to jest required
-    [ForeignKey("Projekt")]
-    public int ProjectId { get; set; }
+    public int? ProjectId { get; set; }
     
     // TODO:Zapytac leszcza czm to jest required
-    public List<JobDto> Jobs { get; set; }
+    public List<JobDto>? Jobs { get; set; }
 
 }

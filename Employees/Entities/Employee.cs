@@ -15,8 +15,6 @@ public class Employee : BaseEntity
     [Required] [MaxLength(50)]
     public string Email { get; set; }
     
-    [ForeignKey("Projekt")]
-    public int ProjectId { get; set; }
-    public virtual Project Project { get; set; }
+    public virtual IEnumerable<EmployeeProject> EmployeeProjects { get; set; }
     public virtual IEnumerable<Job> Jobs { get; set; }
 }   

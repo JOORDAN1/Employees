@@ -28,7 +28,8 @@ public class EmployeeService : IEmployeeService
     {
         var employees = _dbContext.Employees
             .Include(e => e.Jobs)
-            .Include(e => e.Project)
+            .Include(e => e.EmployeeProjects)
+                .ThenInclude(ep => ep.Project)
             .ToList();
         
         var employeesDto = _mapper.Map<List<EmployeeDto>>(employees);
@@ -39,7 +40,8 @@ public class EmployeeService : IEmployeeService
     {
         var employee = _dbContext.Employees
             .Include(e => e.Jobs)
-            .Include(e => e.Project)
+            .Include(e => e.EmployeeProjects)
+                .ThenInclude(ep => ep.Project)
             .FirstOrDefault(e => e.Id == id);
 
         if (employee == null)

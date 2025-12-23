@@ -32,7 +32,8 @@ public class ProjectService : IProjectService
     public IEnumerable<ProjectDto> GetAllProjects()
     {
         var projects = _dbContext.Projects
-            .Include(p => p.Employees)
+            .Include(p => p.EmployeeProjects)
+                .ThenInclude(ep => ep.Employee)
             .ToList();
         //
         var projectDto = _mapper.Map<List<ProjectDto>>(projects);
@@ -42,7 +43,8 @@ public class ProjectService : IProjectService
     public ProjectDto GetProjectById(int id)
     {
         var project = _dbContext.Projects
-            .Include(p => p.Employees)
+            .Include(p => p.EmployeeProjects)
+                .ThenInclude(ep => ep.Employee)
             .FirstOrDefault(p => p.Id == id);
 
         if (project == null)

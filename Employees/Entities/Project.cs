@@ -12,5 +12,6 @@ public class Project : BaseEntity
     [MaxLength(200)] 
     public string Description { get; set; }
 
-    public virtual IEnumerable<Employee> Employees { get; set; }
+    
+    public virtual ICollection<EmployeeProject> EmployeeProjects { get; set; }
 }
