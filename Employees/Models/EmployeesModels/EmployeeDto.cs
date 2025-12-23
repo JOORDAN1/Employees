@@ -4,7 +4,7 @@ namespace Employees.Models;
 
 public class EmployeeDto 
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
     
     [Required] [MaxLength(20)]
     public string FirstName { get; set; }
@@ -15,7 +15,7 @@ public class EmployeeDto
     [Required] [MaxLength(50)]
     public string Email { get; set; }
     
-    public string ProjectName { get; set; }
-    
-     public List<JobDto> Jobs { get; set; }
+    // public List<string> ProjectNames { get; set; }
+    //
+    //  public List<JobDto> Jobs { get; set; }
 }

@@ -13,8 +13,10 @@ public class Job : BaseEntity
     [Required] [MaxLength(200)]
     public string Description { get; set; }
     
-    [ForeignKey("Employee")]
-    public int EmployeeId { get; set; }
+    public int? EmployeeId { get; set; }
+    
+    public Employee? Employee { get; set; }
     
     //TODO: czy moge go jakos mozna to zmienic tutaj zeby mzona bylo potempokazac pracownikow i projekt
+
 }
