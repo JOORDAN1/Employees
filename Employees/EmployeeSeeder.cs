@@ -15,17 +15,24 @@ public class EmployeeSeeder
     {
         if(_dbContext.Database.CanConnect())
         {
-            if (!_dbContext.Employees.Any())
+            if (!_dbContext.Employees.Any() && !_dbContext.Projects.Any())
             {
-                var employees = GenerateEmployees();
+                var projects = GenerateProjects();
+                _dbContext.Projects.AddRange(projects);
+                _dbContext.SaveChanges();
+
+                var employees = GenerateEmployees(projects);
                 _dbContext.Employees.AddRange(employees);
                 _dbContext.SaveChanges();
             }
         }
     }
 
-    private IEnumerable<Employee> GenerateEmployees()
+    private IEnumerable<Employee> GenerateEmployees(List<Project> projects)
     {
+        
+        var projectRed = projects.First(p => p.Name == "ProjectRed");
+        var projectBlue = projects.First(p => p.Name == "ProjectBlue");
         var Employees = new List<Employee>()
         {
             new Employee()
@@ -33,10 +40,9 @@ public class EmployeeSeeder
                 FirstName = "John",
                 LastName = "Wick",
                 Email = "johnwick@gmail.com",
-                Project = new Project()
+                EmployeeProjects = new List<EmployeeProject>()
                 {
-                    Name = "ProjectRed",
-                    Description = "Project Red - very important project"
+                    new EmployeeProject { Project = projectRed }
                 },
                 Jobs = new List<Job>()
                 {
@@ -57,10 +63,10 @@ public class EmployeeSeeder
                 FirstName = "Jerzy",
                 LastName = "Ada",
                 Email = "jerzyada@gmail.com",
-                Project = new Project()
+                EmployeeProjects = new List<EmployeeProject>()
                 {
-                    Name = "ProjectBlue",
-                    Description = "Project Red - not important project"
+                    new EmployeeProject { Project = projectRed },
+                    new EmployeeProject { Project = projectBlue }
                 },
                 Jobs = new List<Job>()
                 {
@@ -79,5 +85,22 @@ public class EmployeeSeeder
         };
         
         return Employees;
+    }
+    
+    private List<Project> GenerateProjects()
+    {
+        return new List<Project>()
+        {
+            new Project
+            {
+                Name = "ProjectRed",
+                Description = "Project Red - very important project"
+            },
+            new Project
+            {
+                Name = "ProjectBlue",
+                Description = "Project Blue - less important project"
+            }
+        };
     }
 }

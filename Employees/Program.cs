@@ -4,7 +4,14 @@ using Employees.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy
+            .WithOrigins("http://localhost:56978") 
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 builder.Services.AddControllers();
 builder.Services.AddDbContext<EmployeesDbContext>();
 builder.Services.AddScoped<EmployeeSeeder>();
@@ -23,6 +30,8 @@ using (var scope = app.Services.CreateScope())
     seeder.Seed();
 }
 
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -30,6 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configure the HTTP request pipeline.
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 

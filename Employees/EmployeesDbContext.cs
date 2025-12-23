@@ -5,7 +5,7 @@ namespace Employees;
 
 public class EmployeesDbContext : DbContext
 {
-    private string _connectionString = "Server=localhost;Database=Employees;user=superadmin;password=superadmin;";
+    private string _connectionString = "Server=localhost;Database=EmployeeV2;user=superadmin;password=superadmin;";
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<Job> Jobs { get; set; }
