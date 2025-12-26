@@ -11,18 +11,20 @@ public class EmployeeMappingProfile:Profile
 {
     public EmployeeMappingProfile()
     {
-        CreateMap<Employee, EmployeeDto>();
-            // .ForMember(e => e.ProjectNames,
-            //     p => p.MapFrom(e => e.EmployeeProjects.Select(ep => ep.Project.Name)));
+        CreateMap<Employee, EmployeeDto>()
+            .ForMember(e => e.ProjectNames,
+                p => p.MapFrom(e => e.EmployeeProjects.Select(ep => ep.Project.Name)));
         CreateMap<Job, JobDto>();
         CreateMap<CreateEmployeeDto, Employee>();
         
-        CreateMap<Project, ProjectDto>();
+        CreateMap<Project, ProjectDto>()
+            .ForMember(p => p.Employees,
+                e => e.MapFrom(p => p.EmployeeProjects.Select(ep => ep.Employee)));
         CreateMap<Employee, ProjectEmployeeDto>();
-        CreateMap<CreateProjectDto, Project>();
+        CreateMap<ProjectDto, Project>();
 
         CreateMap<Job, DisplayJobDto>();
-        CreateMap<CreateJobDto, Job>();
+        CreateMap<DisplayJobDto, Job>();
         
     }
     

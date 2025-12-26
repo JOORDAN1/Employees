@@ -12,9 +12,9 @@ public interface IProjectService
 
     ProjectDto GetProjectById(int id);
 
-    int CreateProject(CreateProjectDto dto);
+    int CreateProject(ProjectDto dto);
 
-    bool UpdateProject(int id, CreateProjectDto dto);
+    bool UpdateProject(int id, ProjectDto dto);
     bool Delete(int id);
 }
 
@@ -56,7 +56,7 @@ public class ProjectService : IProjectService
         return projectDto;
     }
     
-    public int CreateProject(CreateProjectDto dto)
+    public int CreateProject(ProjectDto dto)
     {
         var project = _mapper.Map<Project>(dto);
         _dbContext.Projects.Add(project);
@@ -65,7 +65,7 @@ public class ProjectService : IProjectService
         return project.Id;
     }
     
-    public bool UpdateProject(int id, CreateProjectDto dto)
+    public bool UpdateProject(int id, ProjectDto dto)
     {
         var project = _dbContext
             .Projects

@@ -37,7 +37,7 @@ public class ProjectController : ControllerBase
     }
     
     [HttpPost("projects")]
-    public ActionResult CreateProject([FromBody] CreateProjectDto dto)
+    public ActionResult CreateProject([FromBody] ProjectDto dto)
     {
         if (!ModelState.IsValid)
         {
@@ -49,7 +49,7 @@ public class ProjectController : ControllerBase
     }
     
     [HttpPut("projects/{id}")]
-    public ActionResult Update([FromBody] CreateProjectDto dto, [FromRoute] int id)
+    public ActionResult Update([FromBody] ProjectDto dto, [FromRoute] int id)
     {
         if (!ModelState.IsValid)
         {

@@ -10,7 +10,7 @@ public interface IJobService
 {
     IEnumerable<DisplayJobDto> GetAllJobs();
     DisplayJobDto GetJobById(int id);
-    int CreateJob(CreateJobDto dto);
+    int CreateJob(DisplayJobDto dto);
     bool UpdateJobs(int id, UpdateJobDto dto);
     bool Delete(int id);
 
@@ -50,7 +50,7 @@ public class JobService : IJobService
         return jobDto;
     }
 
-    public int CreateJob(CreateJobDto dto)
+    public int CreateJob(DisplayJobDto dto)
     {
         var job = _mapper.Map<Job>(dto);
         _dbContext.Add(job);

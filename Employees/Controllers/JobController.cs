@@ -36,7 +36,7 @@ public class JobController : ControllerBase
     }
 
     [HttpPost("jobs")]
-    public ActionResult CreateJob([FromBody] CreateJobDto dto)
+    public ActionResult CreateJob([FromBody] DisplayJobDto dto)
     {
         if (!ModelState.IsValid)
         {
