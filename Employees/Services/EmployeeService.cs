@@ -9,8 +9,8 @@ public interface IEmployeeService
 {
     IEnumerable<EmployeeDto> GetAllEmployees();
     EmployeeDto GetEmployeeById(int id);
-    int CreateEmployee(CreateEmployeeDto dto);
-    bool UpdateEmployees(int id, UpdateEmployeeDto dto);
+    int CreateEmployee(EmployeeDto dto);
+    bool UpdateEmployees(int id, EmployeeDto dto);
     bool Delete(int id);
 }
 
@@ -53,7 +53,7 @@ public class EmployeeService : IEmployeeService
         return result;
     }
     
-    public int CreateEmployee(CreateEmployeeDto dto)
+    public int CreateEmployee(EmployeeDto dto)
     {
         var employee = _mapper.Map<Employee>(dto);
         _dbContext.Employees.Add(employee);
@@ -62,7 +62,7 @@ public class EmployeeService : IEmployeeService
         return employee.Id;
     }
     
-    public bool UpdateEmployees(int id, UpdateEmployeeDto dto)
+    public bool UpdateEmployees(int id, EmployeeDto dto)
     {
         var employee = _dbContext
             .Employees

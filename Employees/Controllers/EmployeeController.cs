@@ -35,7 +35,7 @@ public class EmployeeController : ControllerBase
     }
     
     [HttpPost("employees")]
-    public ActionResult CreateEmployee([FromBody] CreateEmployeeDto dto)
+    public ActionResult CreateEmployee([FromBody] EmployeeDto dto)
     {
         if (!ModelState.IsValid)
         {
@@ -47,7 +47,7 @@ public class EmployeeController : ControllerBase
     }
     
     [HttpPut("employees/{id}")]
-    public ActionResult Update([FromBody] UpdateEmployeeDto dto, [FromRoute] int id)
+    public ActionResult Update([FromBody] EmployeeDto dto, [FromRoute] int id)
     {
         if (!ModelState.IsValid)
         {

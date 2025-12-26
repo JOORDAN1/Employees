@@ -48,7 +48,7 @@ public class JobController : ControllerBase
     }
 
     [HttpPut("jobs/{id}")]
-    public ActionResult Updatejob([FromBody] UpdateJobDto dto, [FromRoute] int id)
+    public ActionResult Updatejob([FromBody] DisplayJobDto dto, [FromRoute] int id)
     {
         if (!ModelState.IsValid)
         {

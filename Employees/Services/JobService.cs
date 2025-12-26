@@ -11,7 +11,7 @@ public interface IJobService
     IEnumerable<DisplayJobDto> GetAllJobs();
     DisplayJobDto GetJobById(int id);
     int CreateJob(DisplayJobDto dto);
-    bool UpdateJobs(int id, UpdateJobDto dto);
+    bool UpdateJobs(int id, DisplayJobDto dto);
     bool Delete(int id);
 
 }
@@ -29,6 +29,7 @@ public class JobService : IJobService
     public IEnumerable<DisplayJobDto> GetAllJobs()
     {
         var jobs = _dbContext.Jobs
+            .Include(j => j.Employee)
             .ToList();
         
         var jobsDto = _mapper.Map<IEnumerable<DisplayJobDto>>(jobs);
@@ -59,7 +60,7 @@ public class JobService : IJobService
         return job.Id;
     }
     
-    public bool UpdateJobs(int id, UpdateJobDto dto)
+    public bool UpdateJobs(int id, DisplayJobDto dto)
     {
         var job = _dbContext
             .Jobs
