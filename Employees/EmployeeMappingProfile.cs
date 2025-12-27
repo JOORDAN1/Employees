@@ -28,7 +28,10 @@ public class EmployeeMappingProfile:Profile
                 e => e.MapFrom(j => j.Employee));
         CreateMap<Employee, JobEmployeeDto>();
         CreateMap<DisplayJobDto, Job>();
-        
+
+        CreateMap<EmployeeProject, EmployeeProjectsDto>();
+        CreateMap<EmployeeProjectsDto, EmployeeProject>();
+
     }
     
 }

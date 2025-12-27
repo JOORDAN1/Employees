@@ -34,6 +34,13 @@ public class EmployeeController : ControllerBase
         return Ok(employee);
     }
     
+    [HttpGet("employeesNotInProject/{id}")]
+    public IActionResult GetEmployeesNotInProjectBy([FromRoute] int id)
+    {
+        var employees = _employeeService.GetEmployeesNotInProjectById(id);
+        return Ok(employees);
+    }
+    
     [HttpPost("employees")]
     public ActionResult CreateEmployee([FromBody] EmployeeDto dto)
     {
@@ -75,4 +82,6 @@ public class EmployeeController : ControllerBase
 
         return NotFound();
     }
+    
+    
 }

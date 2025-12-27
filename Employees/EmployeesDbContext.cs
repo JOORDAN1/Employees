@@ -10,6 +10,8 @@ public class EmployeesDbContext : DbContext
     public DbSet<Project> Projects { get; set; }
     public DbSet<Job> Jobs { get; set; }
     
+    public DbSet<EmployeeProject> EmployeeProjects { get; set; }
+    
     
     override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)  
     {
