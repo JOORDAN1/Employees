@@ -11,7 +11,7 @@ public interface IJobService
     IEnumerable<DisplayJobDto> GetAllJobs();
     DisplayJobDto GetJobById(int id);
     int CreateJob(DisplayJobDto dto);
-    bool UpdateJobs(int id, DisplayJobDto dto);
+    bool UpdateJobs(int id, UpdateJobDto dto);
     bool Delete(int id);
 
 }
@@ -60,10 +60,11 @@ public class JobService : IJobService
         return job.Id;
     }
     
-    public bool UpdateJobs(int id, DisplayJobDto dto)
+    public bool UpdateJobs(int id, UpdateJobDto dto)
     {
         var job = _dbContext
             .Jobs
+            .Include(j => j.Employee)
             .FirstOrDefault(r => r.Id == id);
         
         if (job == null)
@@ -73,6 +74,7 @@ public class JobService : IJobService
         
         job.Name = dto.Name;
         job.Description = dto.Description;
+        job.EmployeeId = dto.EmployeeId;
         
         _dbContext.SaveChanges();
 
