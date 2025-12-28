@@ -9,9 +9,11 @@ public interface IEmployeeService
 {
     IEnumerable<EmployeeDto> GetAllEmployees();
     EmployeeDto GetEmployeeById(int id);
-    int CreateEmployee(CreateEmployeeDto dto);
-    bool UpdateEmployees(int id, UpdateEmployeeDto dto);
+    int CreateEmployee(EmployeeDto dto);
+    bool UpdateEmployees(int id, EmployeeDto dto);
     bool Delete(int id);
+
+    IEnumerable<EmployeeDto>  GetEmployeesNotInProjectById(int id);
 }
 
 public class EmployeeService : IEmployeeService
@@ -31,6 +33,7 @@ public class EmployeeService : IEmployeeService
             .Include(e => e.EmployeeProjects)
                 .ThenInclude(ep => ep.Project)
             .ToList();
+        
         
         var employeesDto = _mapper.Map<List<EmployeeDto>>(employees);
         return employeesDto;
@@ -53,7 +56,27 @@ public class EmployeeService : IEmployeeService
         return result;
     }
     
-    public int CreateEmployee(CreateEmployeeDto dto)
+    public IEnumerable<EmployeeDto>  GetEmployeesNotInProjectById(int id)
+    {
+        var employees = _dbContext.Employees
+            .Include(e => e.Jobs)
+            .Include(e => e.EmployeeProjects)
+            .ThenInclude(ep => ep.Project)
+            .Where(e => !e.EmployeeProjects.Any(ep => ep.ProjectId == id))
+            .ToList();
+
+        if (employees == null)
+        {
+            return null;
+        }
+
+        var employeesDto = _mapper.Map<List<EmployeeDto>>(employees);
+        return employeesDto;
+    }
+    
+    
+    
+    public int CreateEmployee(EmployeeDto dto)
     {
         var employee = _mapper.Map<Employee>(dto);
         _dbContext.Employees.Add(employee);
@@ -62,7 +85,7 @@ public class EmployeeService : IEmployeeService
         return employee.Id;
     }
     
-    public bool UpdateEmployees(int id, UpdateEmployeeDto dto)
+    public bool UpdateEmployees(int id, EmployeeDto dto)
     {
         var employee = _dbContext
             .Employees

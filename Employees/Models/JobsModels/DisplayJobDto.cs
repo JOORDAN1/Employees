@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Employees.Models.ProjectsModels;
 
 namespace Employees.Models.JobsModels;
 
@@ -13,4 +14,6 @@ public class DisplayJobDto
     
     [Required] [MaxLength(200)]
     public string Description { get; set; }
+    
+    public JobEmployeeDto? Employee { get; set; }
 }

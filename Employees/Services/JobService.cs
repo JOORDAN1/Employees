@@ -10,7 +10,7 @@ public interface IJobService
 {
     IEnumerable<DisplayJobDto> GetAllJobs();
     DisplayJobDto GetJobById(int id);
-    int CreateJob(CreateJobDto dto);
+    int CreateJob(DisplayJobDto dto);
     bool UpdateJobs(int id, UpdateJobDto dto);
     bool Delete(int id);
 
@@ -29,6 +29,7 @@ public class JobService : IJobService
     public IEnumerable<DisplayJobDto> GetAllJobs()
     {
         var jobs = _dbContext.Jobs
+            .Include(j => j.Employee)
             .ToList();
         
         var jobsDto = _mapper.Map<IEnumerable<DisplayJobDto>>(jobs);
@@ -39,6 +40,7 @@ public class JobService : IJobService
     public DisplayJobDto GetJobById(int id)
     {
         var job = _dbContext.Jobs
+            .Include(j => j.Employee)
             .FirstOrDefault(j => j.Id == id);
 
         if (job == null)
@@ -50,7 +52,7 @@ public class JobService : IJobService
         return jobDto;
     }
 
-    public int CreateJob(CreateJobDto dto)
+    public int CreateJob(DisplayJobDto dto)
     {
         var job = _mapper.Map<Job>(dto);
         _dbContext.Add(job);
@@ -63,6 +65,7 @@ public class JobService : IJobService
     {
         var job = _dbContext
             .Jobs
+            .Include(j => j.Employee)
             .FirstOrDefault(r => r.Id == id);
         
         if (job == null)
@@ -72,6 +75,7 @@ public class JobService : IJobService
         
         job.Name = dto.Name;
         job.Description = dto.Description;
+        job.EmployeeId = dto.EmployeeId;
         
         _dbContext.SaveChanges();
 

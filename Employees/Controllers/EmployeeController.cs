@@ -34,8 +34,15 @@ public class EmployeeController : ControllerBase
         return Ok(employee);
     }
     
+    [HttpGet("employeesNotInProject/{id}")]
+    public IActionResult GetEmployeesNotInProjectBy([FromRoute] int id)
+    {
+        var employees = _employeeService.GetEmployeesNotInProjectById(id);
+        return Ok(employees);
+    }
+    
     [HttpPost("employees")]
-    public ActionResult CreateEmployee([FromBody] CreateEmployeeDto dto)
+    public ActionResult CreateEmployee([FromBody] EmployeeDto dto)
     {
         if (!ModelState.IsValid)
         {
@@ -47,7 +54,7 @@ public class EmployeeController : ControllerBase
     }
     
     [HttpPut("employees/{id}")]
-    public ActionResult Update([FromBody] UpdateEmployeeDto dto, [FromRoute] int id)
+    public ActionResult Update([FromBody] EmployeeDto dto, [FromRoute] int id)
     {
         if (!ModelState.IsValid)
         {
@@ -75,4 +82,6 @@ public class EmployeeController : ControllerBase
 
         return NotFound();
     }
+    
+    
 }

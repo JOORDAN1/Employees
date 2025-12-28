@@ -8,7 +8,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
         policy => policy
-            .WithOrigins("http://localhost:56978") 
+            .WithOrigins("http://localhost:53394") 
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -19,6 +19,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IEmployeeService,  EmployeeService>();
 builder.Services.AddScoped<IProjectService,  ProjectService>();
 builder.Services.AddScoped<IJobService,  JobService>();
+builder.Services.AddScoped<IEmployeeProjectsService,  EmployeeProjectsService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

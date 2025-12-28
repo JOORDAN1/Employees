@@ -4,6 +4,8 @@ namespace Employees.Models.ProjectsModels;
 
 public class ProjectEmployeeDto
 {
+    public int Id { get; set; }
+    
     [Required] [MaxLength(20)]
     public string FirstName { get; set; }
     

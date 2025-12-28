@@ -15,7 +15,7 @@ public class EmployeeDto
     [Required] [MaxLength(50)]
     public string Email { get; set; }
     
-    // public List<string> ProjectNames { get; set; }
-    //
-    //  public List<JobDto> Jobs { get; set; }
+    public List<string>? ProjectNames { get; set; }
+    
+     public List<string>? JobNames { get; set; }
 }

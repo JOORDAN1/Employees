@@ -14,5 +14,5 @@ public class ProjectDto
     [MaxLength(200)] 
     public string Description { get; set; }
 
-    public IEnumerable<ProjectEmployeeDto> Employees { get; set; }
+    public IEnumerable<ProjectEmployeeDto>? Employees { get; set; }
 }
