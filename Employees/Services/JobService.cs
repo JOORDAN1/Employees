@@ -40,6 +40,7 @@ public class JobService : IJobService
     public DisplayJobDto GetJobById(int id)
     {
         var job = _dbContext.Jobs
+            .Include(j => j.Employee)
             .FirstOrDefault(j => j.Id == id);
 
         if (job == null)
