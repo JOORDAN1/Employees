@@ -13,8 +13,10 @@ public class EmployeeMappingProfile:Profile
     {
         CreateMap<Employee, EmployeeDto>()
             .ForMember(e => e.ProjectNames,
-                p => p.MapFrom(e => e.EmployeeProjects.Select(ep => ep.Project.Name)));
-        CreateMap<Job, JobDto>();
+                p => p.MapFrom(e => e.EmployeeProjects.Select(ep => ep.Project.Name)))
+            .ForMember(e => e.JobNames,
+                j => j.MapFrom(e => e.Jobs.Select(ej => ej.Name)));
+        
         CreateMap<EmployeeDto, Employee>();
         
         CreateMap<Project, ProjectDto>()

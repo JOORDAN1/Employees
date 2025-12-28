@@ -34,6 +34,7 @@ public class EmployeeService : IEmployeeService
                 .ThenInclude(ep => ep.Project)
             .ToList();
         
+        
         var employeesDto = _mapper.Map<List<EmployeeDto>>(employees);
         return employeesDto;
     }
